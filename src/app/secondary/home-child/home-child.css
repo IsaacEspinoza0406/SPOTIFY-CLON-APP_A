@@ -1,73 +1,56 @@
 :host {
-  display: block;
-  padding: 20px;
-  color: var(--spotify-text-primary);
-  width: 100%;
+  display: flex;
+  flex-direction: column; 
   height: 100%;
-  overflow-y: auto;
+  overflow: hidden;
+  color: var(--spotify-text-primary);
+  background-color: var(--spotify-black);
+  box-sizing: border-box;
 }
 
-.search-container {
+.welcome-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 30px;
-}
-
-h1 {
-  font-size: 2.5em;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-input[type="text"] {
-  width: 100%;
-  max-width: 500px;
-  padding: 15px 20px;
-  border-radius: 50px;
-  border: none;
-  background-color: var(--spotify-gray-light);
-  color: var(--spotify-text-primary);
-  font-size: 1.1em;
-  outline: none;
-  transition: background-color 0.2s;
-}
-
-input[type="text"]:focus {
-  background-color: #333;
-}
-
-.results-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-.results-section {
-  background-color: var(--spotify-gray-dark);
+  text-align: center;
+  flex: 1;
   padding: 20px;
-  border-radius: 8px;
+  background: linear-gradient(135deg, var(--spotify-gray-medium), var(--spotify-black) 60%);
 }
 
-.results-section h2 {
-  font-size: 1.5em;
-  font-weight: 500;
-  border-bottom: 1px solid var(--spotify-gray-light);
-  padding-bottom: 10px;
+.welcome-container h1 {
+  font-size: 3em;
+  font-weight: 900;
   margin-bottom: 15px;
 }
 
-.result-item {
-  padding: 10px;
-  border-radius: 4px;
-}
-
-.result-item:hover {
-  background-color: var(--spotify-gray-light);
-}
-
-.result-item p {
-  font-size: 1em;
-  font-weight: 300;
+.welcome-container p {
+  font-size: 1.2em;
   color: var(--spotify-text-secondary);
+  max-width: 500px;
 }
+
+.search-results-wrapper {
+  flex: 1; 
+  overflow-y: auto; 
+}
+
+.results-section {
+  padding: 20px 20px 30px 20px; 
+}
+
+.results-section h2 {
+  font-size: 1.8em;
+  font-weight: 700;
+  color: var(--spotify-text-primary);
+  margin-bottom: 25px;
+}
+
+.no-results {
+  text-align: center;
+  color: var(--spotify-text-secondary);
+  font-size: 1.2em;
+  margin-top: 50px;
+}
+

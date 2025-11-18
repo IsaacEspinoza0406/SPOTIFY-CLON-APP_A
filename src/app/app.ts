@@ -1,6 +1,5 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { SpotifyLoginService } from './services/spotify-api/spotify-login-service';
-import { SpotifyAlbumService } from './services/spotify-api/spotify-album-service';
 import { CookiesStorageService } from './services/general/cookies-storage-service';
 
 @Component({

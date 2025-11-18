@@ -1,37 +1,60 @@
-@if (tracks().length > 0 || artists().length > 0 || albums().length > 0) {
-  
-  <div class="results-container">
+@if (!isSearching()) {
+  <div class="welcome-container">
+    <h1>Explora tu música</h1>
+    <p>Usa la barra de arriba para buscar canciones, artistas y álbumes.</p>
+  </div>
+}
+
+@if (isSearching()) {
+  <div class="search-results-wrapper">
 
     @if (tracks().length > 0) {
       <div class="results-section">
         <h2>Canciones</h2>
-        @for (track of tracks(); track track.id) {
-          <div class="result-item">
-            <p>{{ track.name }}</p>
-          </div>
-        }
+        <div class="card-list">
+          @for (track of tracks(); track track.id) {
+            <div class="card" (click)="playTrack(track)">
+              <img [src]="track.album.images.at(0)?.url" alt="{{ track.name }}" class="card-image">
+              <div class="card-title">{{ track.name }}</div>
+              <div class="card-subtitle">{{ track.artists.at(0)?.name }}</div>
+            </div>
+          }
+        </div>
       </div>
     }
 
     @if (artists().length > 0) {
       <div class="results-section">
         <h2>Artistas</h2>
-        @for (artist of artists(); track artist.id) {
-          <div class="result-item">
-            <p>{{ artist.name }}</p>
-          </div>
-        }
+        <div class="card-list">
+          @for (artist of artists(); track artist.id) {
+            <div class="card" (click)="goToArtist(artist.id)">
+              <img [src]="artist.images.at(0)?.url" alt="{{ artist.name }}" class="card-image artist">
+              <div class="card-title">{{ artist.name }}</div>
+            </div>
+          }
+        </div>
       </div>
     }
 
     @if (albums().length > 0) {
       <div class="results-section">
         <h2>Álbumes</h2>
-        @for (album of albums(); track album.id) {
-          <div class="result-item">
-            <p>{{ album.name }}</p>
-          </div>
-        }
+        <div class="card-list">
+          @for (album of albums(); track album.id) {
+            <div class="card" (click)="goToAlbum(album.id)">
+              <img [src]="album.images.at(0)?.url" alt="{{ album.name }}" class="card-image">
+              <div class="card-title">{{ album.name }}</div>
+              <div class="card-subtitle">{{ album.artists.at(0)?.name }}</div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    @if (tracks().length === 0 && artists().length === 0 && albums().length === 0) {
+      <div class="no-results">
+        <p>No se encontraron resultados para "{{ currentQuery() }}".</p>
       </div>
     }
 

@@ -14,7 +14,8 @@ import { RouterModule } from '@angular/router';
 import { authInterceptor } from './interceptors/auth-interceptor';
 import { addAuthHeaderInterceptor } from './interceptors/core/add-auth-header-interceptor';
 import { SpotifyLoginService } from './services/spotify-api/spotify-login-service';     
-import { CookiesStorageService } from './services/general/cookies-storage-service'; 
+import { CookiesStorageService } from './services/general/cookies-storage-service';
+import { SearchBar } from './components/search-bar/search-bar'; 
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { CookiesStorageService } from './services/general/cookies-storage-servic
     AudioController,
     Playlist,
     Player,
+    SearchBar,
   ],
   imports: [
     BrowserModule,
