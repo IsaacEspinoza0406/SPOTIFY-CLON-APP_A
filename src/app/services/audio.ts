@@ -5,16 +5,16 @@ import { Track } from '../interfaces/track';
   providedIn: 'root'
 })
 export class AudioService {
-  
+
   private audio = new Audio();
   private playlist: Track[] = [];
-  private currentTrackIndex = -1; 
+  private currentTrackIndex = -1;
 
   public currentSong = signal<Track | undefined>(undefined);
   public isPlaying = signal(false);
   public duration = signal(0);
   public currentTime = signal(0);
-  
+
   constructor() {
     this.audio.addEventListener('loadedmetadata', () => this.duration.set(this.audio.duration));
     this.audio.addEventListener('timeupdate', () => this.currentTime.set(this.audio.currentTime));
@@ -30,7 +30,7 @@ export class AudioService {
     if (!song || !song.preview_url) {
       console.error(`Error: La canción '${song?.name}' no tiene preview_url.`);
       this.isPlaying.set(false);
-      return; 
+      return;
     }
 
     this.currentSong.set(song);
@@ -46,7 +46,7 @@ export class AudioService {
         this.audio.play();
         this.isPlaying.set(true);
       } else {
-        this.playNextValidSong(false); 
+        this.playNextValidSong(false);
       }
     } else {
       this.audio.pause();
@@ -55,18 +55,18 @@ export class AudioService {
   }
 
   next() {
-    this.playNextValidSong(true); 
+    this.playNextValidSong(true);
   }
 
   previous() {
     if (this.audio.currentTime > 3) {
-      this.audio.currentTime = 0; 
+      this.audio.currentTime = 0;
     } else {
-      this.playNextValidSong(false); 
+      this.playNextValidSong(false);
     }
   }
 
-  
+
   private playNextValidSong(isNext: boolean) {
     if (this.playlist.length === 0) return;
 
@@ -75,22 +75,20 @@ export class AudioService {
 
     do {
       if (isNext) {
-        newIndex = (newIndex + 1) % this.playlist.length; 
+        newIndex = (newIndex + 1) % this.playlist.length;
       } else {
-        newIndex = (newIndex - 1 + this.playlist.length) % this.playlist.length; 
+        newIndex = (newIndex - 1 + this.playlist.length) % this.playlist.length;
       }
-      
+
       attempts++;
-      
-      // Si dimos la vuelta completa y no encontramos nada, paramos.
+
       if (attempts > this.playlist.length) {
-        console.error("No se encontró ninguna canción con preview_url en la lista.");
         this.audio.pause();
         this.isPlaying.set(false);
         return;
       }
-      
-    } while (!this.playlist[newIndex].preview_url); 
+
+    } while (!this.playlist[newIndex].preview_url);
 
     this.playSong(this.playlist[newIndex]);
   }

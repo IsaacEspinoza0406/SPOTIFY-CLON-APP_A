@@ -1,0 +1,13 @@
+<div class="search-container">
+    <span class="home-icon" (click)="goHome()" title="Ir al Inicio">
+        <i class="fa-solid fa-house"></i>
+    </span>
+    <input type="text" class="search-input" placeholder="¿Qué quieres reproducir?" [formControl]="searchControl">
+    @if (searchControl.value) {
+    <span class="clear-icon" (click)="clearSearch()">
+        <i class="fa-solid fa-xmark"></i>
+    </span>
+    }
+
+
+</div>

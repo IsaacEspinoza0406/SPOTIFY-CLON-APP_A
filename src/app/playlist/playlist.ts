@@ -1,18 +1,21 @@
-import { Component, input, effect, inject } from '@angular/core'; 
+import { Component, input, effect, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { SongInfo } from '../song-info/song-info';
 import { Track } from '../interfaces/track';
 import { Image } from '../interfaces/image';
 import { AudioService } from '../services/audio';
 
 @Component({
   selector: 'app-playlist',
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule, SongInfo],
   templateUrl: './playlist.html',
   styleUrl: './playlist.css'
 })
 
 export class Playlist {
 
-private audioService = inject(AudioService);
+  private audioService = inject(AudioService);
 
   playlist = input.required<Track[] | undefined>();
   cover = input.required<Image | undefined>();

@@ -1,9 +1,14 @@
+@if (isReady()) {
 <div class="main-layout">
-  
+
   <div class="content-area">
+    <div style="padding: 20px;">
+      <app-search-bar></app-search-bar>
+    </div>
     <router-outlet></router-outlet>
   </div>
 
   <app-audio-controller class="player-area"></app-audio-controller>
 
 </div>
+}

@@ -9,29 +9,26 @@ import { Playlist } from './playlist/playlist';
 import { Player } from './player/player';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
-import { CommonModule } from '@angular/common'; 
-import { RouterModule } from '@angular/router'; 
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { authInterceptor } from './interceptors/auth-interceptor';
 import { addAuthHeaderInterceptor } from './interceptors/core/add-auth-header-interceptor';
-import { SpotifyLoginService } from './services/spotify-api/spotify-login-service';     
+import { SpotifyLoginService } from './services/spotify-api/spotify-login-service';
 import { CookiesStorageService } from './services/general/cookies-storage-service';
-import { SearchBar } from './components/search-bar/search-bar'; 
+import { SearchBar } from './components/search-bar/search-bar';
 
 @NgModule({
   declarations: [
     App,
-    SongInfo,
     AudioController,
-    Playlist,
-    Player,
-    SearchBar,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CommonModule,   
+    CommonModule,
     RouterModule,
-    AlbumDetail
+    AlbumDetail,
+    SearchBar
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
@@ -43,7 +40,7 @@ import { SearchBar } from './components/search-bar/search-bar';
     ),
     CookieService,
     SpotifyLoginService,
-    CookiesStorageService   
+    CookiesStorageService
   ],
   bootstrap: [App]
 })

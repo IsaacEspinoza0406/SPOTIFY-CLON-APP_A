@@ -1,6 +1,66 @@
-@if (album$ | async; as album) {
-  <div id="main">
-      <app-song-info [song]="album?.tracks?.at(0)" [cover]="album?.images?.at(0)" displayMode="main"></app-song-info>
-      <app-playlist [playlist]="album.tracks" [cover]="album?.images?.at(0)"></app-playlist>
+@if (results$ | async; as results) {
+<div class="search-results-container">
+
+  @if (results.artists.items.length > 0) {
+  <div class="result-section">
+    <h3 class="section-title">Artistas</h3>
+    <div class="grid-container">
+      @for (artist of results.artists.items; track artist.id) {
+      <div class="result-item" (click)="clickArtist(artist)">
+        @if(artist.images && artist.images.length > 0){
+        <img [src]="artist.images[0].url" alt="" class="result-img rounded">
+        } @else {
+        <div class="result-img-placeholder rounded"></div>
+        }
+        <div class="result-info">
+          <span class="result-title">{{artist.name}}</span>
+          <span class="result-subtitle">Artista</span>
+        </div>
+      </div>
+      }
+    </div>
   </div>
+  }
+
+  @if (results.tracks.items.length > 0) {
+  <div class="result-section">
+    <h3 class="section-title">Canciones</h3>
+    <div class="list-container">
+      @for (track of results.tracks.items; track track.id) {
+      <div class="result-item list" (click)="playTrack(track, results.tracks.items)">
+        <img [src]="track.album.images[0].url" alt="" class="result-img">
+        <div class="result-info">
+          <span class="result-title">{{track.name}}</span>
+          <span class="result-subtitle">{{track.artists[0].name}} • {{track.album.name}}</span>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+  }
+
+  @if (results.albums.items.length > 0) {
+  <div class="result-section">
+    <h3 class="section-title">Álbumes</h3>
+    <div class="grid-container">
+      @for (album of results.albums.items; track album.id) {
+      <div class="result-item" (click)="clickAlbum(album)">
+        <img [src]="album.images[0].url" alt="" class="result-img">
+        <div class="result-info">
+          <span class="result-title">{{album.name}}</span>
+          <span class="result-subtitle">{{album.artists[0].name}}</span>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+  }
+
+</div>
+}
+@else if (album$ | async; as album) {
+<div id="main">
+  <app-song-info [song]="album?.tracks?.at(0)" [cover]="album?.images?.at(0)" displayMode="main"></app-song-info>
+  <app-playlist [playlist]="album.tracks" [cover]="album?.images?.at(0)"></app-playlist>
+</div>
 }

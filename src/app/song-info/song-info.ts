@@ -1,26 +1,28 @@
 import { Component, input, HostListener, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Track } from '../interfaces/track';
 import { Image } from '../interfaces/image';
 import { AudioService } from '../services/audio';
 
 @Component({
   selector: 'app-song-info',
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './song-info.html',
   styleUrl: './song-info.css',
-  host:{
+  host: {
     '[class]': 'displayMode()',
   }
 })
 
-export class SongInfo{
-  display_mode = input.required<string>({ alias: 'displayMode'});
+export class SongInfo {
+  display_mode = input.required<string>({ alias: 'displayMode' });
   song = input.required<Track | undefined>();
   cover = input.required<Image | undefined>();
 
   private audioService = inject(AudioService);
 
-  displayMode(){
+  displayMode() {
     return this.display_mode();
   }
 
